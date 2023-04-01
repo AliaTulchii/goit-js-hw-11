@@ -13,7 +13,7 @@ const refs = {
   };
   
 const loadMoreBtn = new LoadMoreBtn({
-    selector: '.load-more',
+    selector: '[data-action="load-more"]',
     hidden: true,
   });
   
