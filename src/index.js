@@ -38,7 +38,7 @@ const lightbox = new SimpleLightbox('.gallery a', {
       apiService.resetPage();
     const { hits, totalHits } = await apiService.fetchGallery();
   
-    if (totalHits > 5) {
+    if (totalHits > 40) {
       loadMoreBtn.show()
       loadMoreBtn.enable();
     } else {
@@ -129,7 +129,8 @@ const lightbox = new SimpleLightbox('.gallery a', {
   </div>
 </div>`;
       }
-    ).join('');
+      ).join('');
+      refs.galleryBox.insertAdjacentHTML('beforeend', markup);
     lightbox.refresh();
   }
   
