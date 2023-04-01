@@ -32,11 +32,19 @@ const lightbox = new SimpleLightbox('.gallery a', {
   async function onSearchFormSubmit(e) {
     e.preventDefault();
   loadMoreBtn.hide();
-    apiService.query = e.currentTarget.elements.searchQuery.value;
+    apiService.query = e.currentTarget.elements.searchQuery.value.trim();
     
-    console.log(apiService.page);
+    
       apiService.resetPage();
     const { hits, totalHits } = await apiService.fetchGallery();
+
+    if (!hits.length) {
+      Notify.failure(
+        `Sorry, there are no images matching your search query. Please try again.`);
+        clearGalleryMarkup();
+      loadMoreBtn.hide();
+      return;
+    }
   
     if (totalHits > 40) {
       loadMoreBtn.show()
@@ -45,17 +53,19 @@ const lightbox = new SimpleLightbox('.gallery a', {
       loadMoreBtn.disable();
     }
   
-    if (apiService.query.trim() === '') {
+    if (apiService.query === '') {
       Notify.info(
         `Sorry, there are no images matching your search query. Please try again.`
       );
+      loadMoreBtn.hide();
       return;
     }
   
       if (totalHits === 0) {
       Notify.failure(
         `Sorry, there are no images matching your search query. Please try again.`
-      );
+        );
+        
       return;
     }
   
