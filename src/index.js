@@ -84,7 +84,7 @@ const lightbox = new SimpleLightbox('.gallery a', {
       loadMoreBtn.enable();
   
      console.log(apiService.quantityPage())
-      if (apiService.quantityPage() > totalHits) {
+      if (apiService.quantityPage() >= totalHits) {
         Notify.info(`We're sorry, but you've reached the end of search results.`);
         loadMoreBtn.hide();
       }
